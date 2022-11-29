@@ -15,6 +15,12 @@ export default function Home() {
     if(!term.trim()) return
     router.push(`/search?term=${term.trim()}&searchType=`)
   }
+  async function randomSearch(event) {
+    event.preventDefault();
+    const randomTerm = await fetch("https://random-word-api.herokuapp.com/word?number=1").then((res) => res.json())
+    if(!randomTerm) return
+    router.push(`/search?term=${randomTerm}&searchType=`)
+  }
   return (
     <div>
       <Head>
@@ -29,7 +35,7 @@ export default function Home() {
       {/* Body */}
 
       <form className='flex flex-col items-center m-40'>
-        <Image width="300" height="100" className='object-cover'
+        <Image priority width="300" height="100" className='object-cover w-auto h-auto'
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png"
         alt='google'/>
         <div className='flex w-full mt-5 mx-auto max-w-[90%] border border-gray-200 hover:shadow-lg focus-within:shadow-lg px-5 py-3 rounded-full items-center sm:max-w-xl lg:max-w-2xl'>
@@ -39,7 +45,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col sm:flex-row w-[50%] space-y-2 mt-8 sm:space-y-0 sm:space-x-4 justify-center">
           <button onClick={search} className='btn'>Google Search</button>
-          <button className='btn'>I'm Feeling Lucky</button>
+          <button onClick={randomSearch} className='btn'>I&apos;m Feeling Lucky</button>
         </div>
       </form>
 
