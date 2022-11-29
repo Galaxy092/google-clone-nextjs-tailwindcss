@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef } from "react";
-import { SearchIcon, MicrophoneIcon, XIcon } from "@heroicons/react/solid";
+import { SearchIcon, MicrophoneIcon, XIcon, CameraIcon } from "@heroicons/react/solid";
 import User from "./User";
 import SearchHeaderOptions from "./SearchHeaderOptions";
 
@@ -23,8 +23,9 @@ export default function SearchHeader() {
                 <form className="flex border border-gray-200 rounded-full shadow-lg px-6 py-3 ml-10 mr-5 flex-grow max-w-3xl items-center">
                     <input type="text" defaultValue={router.query.term} ref={searchInputRef} className="w-full focus:outline-none"/>
                     <XIcon onClick={() => (searchInputRef.current.value = "")} className="h-7 text-gray-500 cursor-pointer sm:mr-3"/>
-                    <MicrophoneIcon className="h-6 hidden sm:inline-flex text-blue-500 pl-4 border-l-2 border-gray-300 mr-3" />
-                    <SearchIcon className="h-6 hidden sm:inline-flex text-blue-500" />
+                    <MicrophoneIcon className="h-6 hidden sm:inline-flex text-blue-500 pl-4 border-l-2 border-gray-300 mr-3 cursor-pointer" />
+                    <CameraIcon className="h-6 hidden sm:inline-flex text-blue-500 mr-3 cursor-pointer" />
+                    <SearchIcon onClick={search} className="h-6 hidden sm:inline-flex text-blue-500 cursor-pointer" />
                     <button onClick={search} type="submit" hidden></button>
                 </form>
                 <User className="ml-auto whitespace-nowrap"/>
